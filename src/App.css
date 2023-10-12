@@ -36,3 +36,108 @@
     transform: rotate(360deg);
   }
 }
+
+/* Styles for centering the form and label/input styling */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+
+.header {
+  background-color: #007bff; /* Change the background color */
+  color: #fff; /* Change the text color to white */
+  text-align: center;
+  padding: 20px;
+  font-size: 32px; /* Increase the font size */
+  text-transform: uppercase; /* Convert text to uppercase */
+  letter-spacing: 2px; /* Add letter spacing */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+
+.btn {
+  padding: 12px 24px;
+  font-size: 18px;
+  margin: 0 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.show-btn {
+  background-color: #28a745;
+  color: #fff;
+}
+
+
+.stylish-label {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff; /* Stylish label color */
+  text-transform: uppercase; /* Convert text to uppercase */
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle text shadow */
+}
+
+/* Style the table */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background-color: #f5f5f5;
+}
+
+/* Style the table header */
+.styled-table th {
+  background-color: #333;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  text-align: left;
+}
+
+/* Style the table rows */
+.styled-table td {
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  background-color: #fff;
+  text-align: left;
+}
