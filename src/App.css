@@ -123,6 +123,7 @@ input {
   border-collapse: collapse;
   border-spacing: 0;
   background-color: #f5f5f5;
+  margin-left: 388px;
 }
 
 /* Style the table header */
@@ -141,3 +142,11 @@ input {
   background-color: #fff;
   text-align: left;
 }
+
+
+.table-container {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+}
+
