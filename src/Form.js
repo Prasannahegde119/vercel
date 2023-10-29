@@ -1,72 +1,70 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import './App.css';
 
 const Form = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [persons, setPersons] = useState([]);
- 
+  const [nameError, setNameError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
 
+  const nameRegex = /^[a-zA-Z]+$/;
+  const phoneRegex = /^\d{10}$/;
 
-  useEffect(() => {
-    // Fetch the list of persons from the API when the component mounts
-    fetch("http://localhost:3000/api/view")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data); // Check the fetched data
-        setPersons(data);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = { name, email };
+    if (nameRegex.test(name) && phoneRegex.test(email)) {
+      const data = { name, email };
 
-    try {
-      const response = await fetch("http://localhost:3000/api/insert", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      try {
+        const response = await fetch("http://localhost:3000/api/insert", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
 
-      if (response.ok) {
-        alert("Data saved successfully.");
-        setName("");
-        setEmail("");
-      } else {
-        alert("Failed to save data.");
+        if (response.ok) {
+          alert("Data saved successfully.");
+          setName("");
+          setEmail("");
+        } else {
+          alert("Failed to save data.");
+        }
+      } catch (error) {
+        console.error(error);
+        alert("An error occurred.");
       }
-    } catch (error) {
-      console.error(error);
-      alert("An error occurred.");
+
+      setNameError('');
+      setPhoneError('');
+    } else {
+      if (!nameRegex.test(name)) {
+        setNameError('Please enter a valid name.');
+      } else {
+        setNameError('');
+      }
+
+      if (!phoneRegex.test(email)) {
+        setPhoneError('Please enter a 10-digit phone number.');
+      } else {
+        setPhoneError('');
+      }
     }
   };
-
-//   const handleShowNames = () => {
-//     // Convert the array of objects into a formatted string
-//     const formattedData = persons.map((person) => `Name: ${person.name}, Email: ${person.email}`).join("\n");
-//     setFormattedData(formattedData);
-//   };
-  
 
   return (
     <div className="form-container">
       <header className="header">
         Phonebook App
       </header>
+      <br></br>
+      <br></br>
       <form className="form">
         <div className="form-group">
           <div className="input-group">
-            <label htmlFor="name">Name:</label>
+            <label htmlFor="name">Name:*</label>
             <input
               type="text"
               id="name"
@@ -75,10 +73,11 @@ const Form = () => {
               onChange={(e) => setName(e.target.value)}
               required
             />
+            <label className="error-message">{nameError}</label>
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="email">Phone Number:</label>
+          <label htmlFor="email">Phone Number:*</label>
           <input
             type="text"
             id="email"
@@ -87,7 +86,10 @@ const Form = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+          <label className="error-message">{phoneError}</label>
         </div>
+        <br></br>
+
         <button
           type="submit"
           className="btn show-btn"
@@ -95,51 +97,7 @@ const Form = () => {
         >
           Add
         </button>
-        {/* <button
-          type="submit"
-          className="btn show-btn"
-          onClick={handleShowNames}
-        >
-          Show
-        </button> */}
-        <div className="input-group">
-          <label htmlFor="yourPhoneNumber" className="stylish-label">
-            User Details
-          </label>
-          {/* <textarea
-  readOnly
-  id="yourPhoneNumber"
-  name="yourPhoneNumber"
-  className="text-area"
-  placeholder="Names will appear here."
-  rows="4"
-  value={
-    persons.length > 0
-      ? persons.map((person) => `${person.name}`).join("\n")
-      : "No data available"
-  }
-></textarea> */}
 
-<div className="table-container">
-          <table className="styled-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Phone Number</th>
-              </tr>
-            </thead>
-            <tbody>
-              {persons.map((person, index) => (
-                <tr key={index}>
-                  <td>{person.name}</td>
-                  <td>{person.email}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        </div>
       </form>
     </div>
   );
