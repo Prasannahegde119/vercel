@@ -1,9 +1,9 @@
 
-
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./App.css";
+import MetaTags from 'react-meta-tags';
+
 
 const View = () => {
   const [persons, setPersons] = useState([]);
@@ -18,7 +18,7 @@ const View = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data); // Check the fetched data
+        console.log(data); 
         setPersons(data);
       })
       .catch((error) => console.error("Error fetching data:", error));
@@ -38,8 +38,8 @@ const View = () => {
         return response.json();
       })
       .then((data) => {
-        console.log("Phone number:", data.email); // Use the fetched phone number
-        // Navigate to the edit page with the phone number
+        console.log("Phone number:", data.email); 
+        
         navigate(`/Update/${data.name}`);
       })
       .catch((error) => console.error("Error fetching phone number:", error));
@@ -65,6 +65,11 @@ const View = () => {
 
   return (
     <div>
+     <MetaTags>
+            <title>Page 1</title>
+            <meta name="description" content="hbdhbsdscshdhsbdhsbdhfsbdjhs" />
+            <meta property="og:title" content="MyApp" />
+          </MetaTags>
       <div className="input-group">
         <label htmlFor="yourPhoneNumber" className="stylish-label">
           User Details
@@ -76,7 +81,7 @@ const View = () => {
           <thead>
             <tr>
               <th>Name</th>
-              <th>Email</th>
+              <th>phoneNumber</th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>

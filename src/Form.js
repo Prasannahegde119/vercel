@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import './App.css';
+import MetaTags from 'react-meta-tags';
 
 const Form = () => {
   const [name, setName] = useState("");
@@ -55,7 +56,13 @@ const Form = () => {
   };
 
   return (
+    
     <div className="form-container">
+<MetaTags>
+            <title>Page 2</title>
+            <meta name="description" content="ajhshbdhbdsmbsndfbsmndfsndfsmndbfnsbd" />
+            <meta property="og:title" content="MyApp" />
+          </MetaTags>
       <header className="header">
         Phonebook App
       </header>

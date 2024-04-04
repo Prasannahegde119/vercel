@@ -1,7 +1,12 @@
 import './NavigationPage.css';
+import { useLocation } from 'react-router-dom';
+
 import { Outlet, Link } from "react-router-dom";
+import kohliImage from './Kohlimage.jpg';
 
 const Layout = () => {
+
+  const location=useLocation();
   return (
     <>
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 20px", background: "#f2f2f2" }}>
@@ -17,8 +22,14 @@ const Layout = () => {
       </nav>
 
       <Outlet />
-
-    </>
+      
+      {location.pathname === '/' && (
+        <div>
+          <img src={kohliImage} alt="kohli" style={{ width: '100%', height: 'auto' }} />
+        </div>
+      )}
+ 
+        </>
   );
 };
 
